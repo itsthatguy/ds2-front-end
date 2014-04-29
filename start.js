@@ -34,5 +34,9 @@ var runCommand = function(command, args) {
   });
 }
 
+
 runCommand("coffee", ['app.coffee']);
-runCommand("gulp", ['watch']);
+
+if (process.env.ENV == 'development') {
+  runCommand("gulp", ['watch']);
+}
