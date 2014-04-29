@@ -1,5 +1,15 @@
 #!/usr/bin/env node
 
+// Environment Variables
+var fs = require('fs');
+
+fs.exists('.env', function (exists) {
+  if (exists) {
+    var dotenv = require('dotenv');
+    dotenv.load();
+  }
+});
+
 var util = require("util");
 var path = require('path');
 var spawn = require('win-spawn');
@@ -36,6 +46,7 @@ var runCommand = function(command, args) {
 
 
 runCommand("coffee", ['app.coffee']);
+console.log("[app] Now running in:", process.env.ENV);
 
 if (process.env.ENV == 'development') {
   runCommand("gulp", ['watch']);
